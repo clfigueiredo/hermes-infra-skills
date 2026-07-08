@@ -25,6 +25,7 @@ Backup versionado das skills de infraestrutura usadas pelo Hermes Agent.
   - Financeiro administrativo
   - Sophos Firewall / SFOS
   - TRENDnet switches
+  - Ubiquiti airMAX AC/M5
 
 ## Restaurar em outro Hermes
 
