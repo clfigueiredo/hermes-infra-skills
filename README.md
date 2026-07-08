@@ -22,6 +22,7 @@ Backup versionado das skills de infraestrutura usadas pelo Hermes Agent.
   - Agenda / calendário / lembretes
   - Financeiro administrativo
   - Sophos Firewall / SFOS
+  - TRENDnet switches
 
 ## Restaurar em outro Hermes
 
