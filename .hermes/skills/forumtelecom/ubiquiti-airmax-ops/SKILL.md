@@ -4,7 +4,6 @@ description: "Use when the user asks to diagnose, configure, audit, align, monit
 version: 1.0.0
 author: Hermes Tutor
 license: MIT
-platforms: [network]
 metadata:
   hermes:
     tags: [ubiquiti, airmax, airos, m5, ac, wireless, ptp, ptmp, isp, snmp]
