@@ -1,0 +1,186 @@
+# =============================================================================
+# Provisionamento Huawei MA5800 — comandos validados
+# =============================================================================
+
+# 1. SETUP INICIAL
+
+# 1.1 Trocar password admin
+enable
+config
+terminal user admin
+ modify-password admin
+ ! input old/new password
+quit
+quit
+
+# 1.2 IP de gerência
+config
+vlan 100 smart
+vlan attrib 100 standard
+port vlan 100 0/19 1
+interface vlanif 100
+ ip address 10.0.0.1 24
+quit
+ip route-static 0.0.0.0 0.0.0.0 10.0.0.254
+
+# 1.3 SNMP para Zabbix
+config
+snmp-agent community read public
+snmp-agent target-host trap-paramsname zbxhost v2c securityname zbxmon
+snmp-agent target-host trap-hostname zbxhost address 10.0.0.50 udp-port 162 trap-paramsname zbxhost
+snmp-agent sys-info version v2c
+snmp-agent
+
+# 1.4 Habilitar SSH
+config
+sshd enable
+sshd timeout 5
+ssh user admin
+ssh user admin authentication-type password
+ssh user admin service-type stelnet
+sftp enable
+
+# =============================================================================
+# 2. ADICIONAR PLACA GPON
+# =============================================================================
+
+config
+board confirm 0/1
+board confirm 0/2
+display board 0
+
+# =============================================================================
+# 3. CRIAR LINE-PROFILE GPON (template de banda/qos)
+# =============================================================================
+
+config
+
+# DBA profile — perfil de banda
+dba-profile add profile-id 10 type4 max 102400      ! 100 Mbps best-effort
+dba-profile add profile-id 11 type4 max 1024000     ! 1 Gbps best-effort
+
+# Line-profile (vincular DBA com tcont)
+ont-lineprofile gpon profile-id 10 profile-name "100M-PPPoE"
+ tcont 1 dba-profile-id 10
+ gem add 1 tcont 1
+ mapping-mode vlan
+ gem mapping 1 0 vlan 100
+ commit
+quit
+
+# =============================================================================
+# 4. CRIAR SRV-PROFILE (template de serviço)
+# =============================================================================
+
+config
+ont-srvprofile gpon profile-id 10 profile-name "1ETH-1WIFI"
+ ont-port eth 4 pots 0
+ port vlan eth 1 100
+ port vlan eth 2 100
+ port vlan eth 3 100
+ port vlan eth 4 100
+ commit
+quit
+
+# =============================================================================
+# 5. AUTORIZAR ONT VIA SN (manual)
+# =============================================================================
+
+config
+interface gpon 0/1
+
+# Ver discovery
+display ont autofind all
+
+# Autorizar
+ont add 0 1 sn-auth "485754B5FVBB002" omci ont-lineprofile-id 10 ont-srvprofile-id 10 desc "Cliente_Joao"
+
+# Verificar
+display ont info 0 1
+display ont optical-info 0 1
+quit
+
+# =============================================================================
+# 6. CRIAR SERVICE-PORT (PPPoE bridged comum no Brasil)
+# =============================================================================
+
+config
+
+# Criar VLAN de serviço (S-VLAN do core)
+vlan 3713 smart
+port vlan 3713 0/19 1                           ! uplink
+
+# Criar service-port
+# - VLAN 3713 = S-VLAN core
+# - GPON 0/1/0 = porta GPON 1, ONT 0
+# - GEMPORT 1 = match com gem do line-profile
+# - user-vlan 100 = C-VLAN do lado da ONT
+# - translate = traduz C-VLAN para S-VLAN
+
+service-port 100 vlan 3713 gpon 0/1/0 ont 1 gemport 1 multi-service user-vlan 100 tag-transform translate
+
+display service-port port 0/1/0
+
+# =============================================================================
+# 7. PROVISIONING EM MASSA (batch)
+# =============================================================================
+
+# Para múltiplas ONTs do mesmo PON com mesmo perfil:
+config
+interface gpon 0/1
+ ont add 0 1 sn-auth "SN1" omci ont-lineprofile-id 10 ont-srvprofile-id 10
+ ont add 0 2 sn-auth "SN2" omci ont-lineprofile-id 10 ont-srvprofile-id 10
+ ont add 0 3 sn-auth "SN3" omci ont-lineprofile-id 10 ont-srvprofile-id 10
+quit
+
+# Service-ports correspondentes:
+service-port 101 vlan 3713 gpon 0/1/0 ont 1 gemport 1 multi-service user-vlan 100 tag-transform translate
+service-port 102 vlan 3713 gpon 0/1/0 ont 2 gemport 1 multi-service user-vlan 100 tag-transform translate
+service-port 103 vlan 3713 gpon 0/1/0 ont 3 gemport 1 multi-service user-vlan 100 tag-transform translate
+
+# =============================================================================
+# 8. REMOVER ONT
+# =============================================================================
+
+# 1. Remover service-port
+undo service-port 100
+
+# 2. Remover ONT
+config
+interface gpon 0/1
+ ont delete 0 1
+quit
+
+# =============================================================================
+# 9. RESET / REBOOT ONT
+# =============================================================================
+
+config
+interface gpon 0/1
+
+# Reset (re-registra OMCI, NÃO reinicia hardware)
+ont reset 0 1
+
+# Reboot (reinicia hardware da ONT)
+ont reboot 0 1
+quit
+
+# =============================================================================
+# 10. BACKUP / SAVE
+# =============================================================================
+
+# Backup para FTP
+backup data to ftp 10.0.0.50 admin senha backup-2026-04-29.cfg
+
+# Salvar config atual (NUNCA esquecer!)
+save
+
+# =============================================================================
+# 11. AUTO-FIND (descoberta automática)
+# =============================================================================
+
+# Habilitar auto-find no PON
+config
+interface gpon 0/1
+ port 0 ont-auto-find enable
+quit

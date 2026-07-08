@@ -1,0 +1,13 @@
+# Nunca versionar segredos/cache/sessões do Hermes
+.hermes/.env
+.hermes/auth.json
+.hermes/config.yaml
+.hermes/sessions/
+.hermes/logs/
+*.gpg
+*.key
+*.pem
+*.crt
+*.p12
+*.pfx
+.env

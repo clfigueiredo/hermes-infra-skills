@@ -1,0 +1,152 @@
+# =============================================================================
+# Provisionamento FiberHome AN5516 — comandos validados
+# =============================================================================
+
+# 1. SETUP INICIAL DO CHASSI
+
+# 1.1 Trocar password (PRIMEIRO PASSO em produção)
+cd device
+set localuser admin password <NOVA_SENHA>
+save
+
+# 1.2 IP de gerência da OLT
+cd service
+set manage vlan name manage vid 100 inputport 19:2 tagged
+set manage vlan name manage ip 10.0.0.1/24 10.0.0.254
+show manage vlan all
+
+# 1.3 SNMP para Zabbix
+cd service
+set snmp community add public ro
+set snmp trapreceiver add 10.0.0.50 version v2c community zbxmon
+show snmp trapreceiver
+
+# 1.4 NTP
+cd service
+set snmp_time_cfg interval 3600 serv_addr a.ntp.br
+
+# 1.5 Configurar uplinks (1G full duplex)
+cd device
+set uplink port 19:1 auto_negotiation disable speed 1000m duplex full
+set uplink port 19:2 auto_negotiation disable speed 1000m duplex full
+set control uplink port 19:1 broadcast enable limit 1500
+set control uplink port 19:1 unknown enable limit 1500
+
+# =============================================================================
+# 2. CRIAR DOMÍNIO QINQ PARA PPPOE (template comum em ISP BR)
+# =============================================================================
+
+cd vlan
+
+# 2.1 Criar domínio
+create oltqinq_domain pppoe
+
+# 2.2 Definir uplink do domínio
+set oltqinq_domain pppoe service_num 1
+
+# 2.3 Regra de uplink (out-VID >= 1024 e <= 4047 → mantém)
+set oltqinq_domain pppoe 1 uprule 7 1024 4 7 4047 3
+
+# 2.4 Regra de downlink (vlan = 3713 → desce)
+set oltqinq_domain pppoe 1 downrule 6 3713 1
+
+# 2.5 Action: adicionar SVLAN 3713 nos pacotes
+set oltqinq_domain pppoe 1 vlan 2 null 0 add 33024 null 3713
+
+# 2.6 Bind domínio ao slot/PON
+set pon attach slot 1 pon 1 attach domain pppoe
+set pon attach slot 1 pon 2 attach domain pppoe
+# ... repetir para todas as PONs do slot
+
+# =============================================================================
+# 3. CRIAR VLAN DE SERVIÇO
+# =============================================================================
+
+cd vlan
+
+# Internet PPPoE - VID 3713 (S-VLAN), uplink em porta 19:1 tagged
+set service pppoe vid_begin 3713 vid_end 3713 uplink 19:1 tagged service_type 1
+
+# Voice (NGN) - VID 421
+set service ngn vid_begin 421 vid_end 421 uplink 19:3 tagged service_type 3
+
+# IPTV multicast - VID 500
+set service iptv vid_begin 500 vid_end 500 uplink 19:1 tagged service_type 5
+
+# =============================================================================
+# 4. PROVISIONAR UMA ONU NOVA (whitelist)
+# =============================================================================
+
+cd gponline
+
+# 4.1 Ver discovery (ONUs aguardando)
+show discovery slot <X> pon <Y>
+
+# Saída esperada — anotar PHY (SN):
+# Slot:1 Pon:1 Phy:FHTT12345678 Status:autofind ...
+
+# 4.2 Adicionar à whitelist (autorizar)
+# Onde TYPE_ID:
+# 26 = AN5506-04-FA (router 4 portas BR comum)
+# 25 = AN5506-01-A (bridge 1 porta)
+# 256 = ONU 3rd-party
+
+set whitelist phy_addr address FHTT12345678 action add slot 1 pon 1 onu 1 type 26
+
+# 4.3 Verificar autorização
+show authorization slot 1 pon 1
+
+# 4.4 Verificar online
+show onu_state slot 1 pon 1
+show onu_info slot 1 pon 1 onu 1
+
+# =============================================================================
+# 5. CONFIGURAR SERVIÇO PPPoE NA ONU
+# =============================================================================
+
+cd service
+
+# 5.1 Definir quantos serviços a porta da ONU vai ter
+set service number 1 1 1 1   # slot=1 pon=1 onu=1 port=1 servicenum=1
+
+# 5.2 Configurar VLAN do serviço (modo bridge transparente)
+service vlan 1 1 1 1 transparent 0 33024 3713
+# slot pon onu port servid mode cos tpid svid
+
+# 5.3 Aplicar configuração
+apply fe-service slot 1 pon 1 onu 1
+
+# 5.4 Verificar
+show fe-service slot 1 pon 1 onu 1
+
+# =============================================================================
+# 6. RESET / REPROVISIONING DE ONU
+# =============================================================================
+
+cd gponline
+
+# Reset (apenas reautentica — não reboota)
+reset onu slot 1 pon 1 onu 1
+
+# Reboot da ONU (reinicializa o equipamento)
+reboot onu slot 1 pon 1 onu 1
+
+# Remover ONU (desautoriza)
+set whitelist phy_addr address FHTT12345678 action delete
+
+# =============================================================================
+# 7. BACKUP / RESTORE
+# =============================================================================
+
+# Backup running config para FTP
+backup running-config to ftp 10.0.0.50 user admin password senha file fh-backup-2026-04-29.cfg
+
+# Restore (CUIDADO — sobrescreve)
+restore startup-config from ftp 10.0.0.50 user admin password senha file fh-backup-2026-04-29.cfg
+reboot
+
+# =============================================================================
+# 8. SAVE (sempre ao final)
+# =============================================================================
+
+save

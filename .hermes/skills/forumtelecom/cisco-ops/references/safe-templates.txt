@@ -1,0 +1,103 @@
+! =============================================================================
+! safe-templates.txt — snippets Cisco validados
+! =============================================================================
+
+! 1. BGP — Peer com upstream (IOS-XE)
+router bgp <SEU_ASN>
+ bgp router-id <SEU_ROUTER_ID>
+ bgp log-neighbor-changes
+ neighbor <PEER_IP> remote-as <PEER_ASN>
+ neighbor <PEER_IP> description "Upstream provider"
+ neighbor <PEER_IP> password 7 <SENHA_MD5>
+ neighbor <PEER_IP> ttl-security hops 1
+ !
+ address-family ipv4
+  neighbor <PEER_IP> activate
+  neighbor <PEER_IP> route-map UPSTREAM-IN in
+  neighbor <PEER_IP> route-map UPSTREAM-OUT out
+  neighbor <PEER_IP> maximum-prefix 1500000 90
+ exit-address-family
+
+! Filtros bogon de entrada
+ip prefix-list BOGONS permit 10.0.0.0/8 le 32
+ip prefix-list BOGONS permit 172.16.0.0/12 le 32
+ip prefix-list BOGONS permit 192.168.0.0/16 le 32
+ip prefix-list BOGONS permit 169.254.0.0/16 le 32
+ip prefix-list BOGONS permit 127.0.0.0/8 le 32
+
+route-map UPSTREAM-IN deny 10
+ match ip address prefix-list BOGONS
+route-map UPSTREAM-IN permit 20
+
+! 2. RTBH BLACKHOLE — community customizável (ajustar para seu ASN)
+ip community-list standard BLACKHOLE permit <SEU_ASN>:666
+
+route-map RTBH-IN permit 10
+ match ip address prefix-list CUSTOMER-PREFIXES
+ match community BLACKHOLE
+ set ip next-hop 192.0.2.1
+ set local-preference 200
+
+! 3. ACL VTY — restringir SSH ao management
+ip access-list standard MGMT-ACCESS
+ permit 10.0.0.0 0.0.0.255
+ deny any log
+
+line vty 0 4
+ access-class MGMT-ACCESS in
+ transport input ssh
+ login authentication default
+
+! 4. AAA com TACACS+
+aaa new-model
+tacacs server TAC1
+ address ipv4 10.0.0.10
+ key 7 <ENCRYPTED_KEY>
+aaa group server tacacs+ TAC-GROUP
+ server name TAC1
+aaa authentication login default group TAC-GROUP local
+aaa authorization exec default group TAC-GROUP local
+aaa accounting exec default start-stop group TAC-GROUP
+
+! 5. SNMPv3 — leitura segura para Zabbix
+snmp-server group ZBX-GRP v3 priv
+snmp-server user zbxmon ZBX-GRP v3 auth sha <AUTHPASS> priv aes 128 <PRIVPASS>
+snmp-server enable traps
+
+! 6. NETFLOW — exportar para coletor
+flow record FLOW-RECORD
+ match ipv4 source address
+ match ipv4 destination address
+ match ipv4 protocol
+ match transport source-port
+ match transport destination-port
+ collect counter bytes
+ collect counter packets
+ collect timestamp sys-uptime first
+ collect timestamp sys-uptime last
+!
+flow exporter FLOW-EXP
+ destination 10.0.0.50
+ source Loopback0
+ transport udp 9995
+ template data timeout 60
+!
+flow monitor FLOW-MON
+ record FLOW-RECORD
+ exporter FLOW-EXP
+ cache timeout active 60
+!
+interface GigabitEthernet0/0
+ ip flow monitor FLOW-MON input
+ ip flow monitor FLOW-MON output
+
+! 7. uRPF — strict mode (CPE para ISP)
+interface GigabitEthernet0/0
+ ip verify unicast source reachable-via rx allow-default
+
+! 8. BFD para BGP (failover rápido)
+interface GigabitEthernet0/1
+ bfd interval 300 min_rx 300 multiplier 3
+
+router bgp <ASN>
+ neighbor <PEER> fall-over bfd

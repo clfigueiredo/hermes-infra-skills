@@ -1,0 +1,2 @@
+Installed from https://github.com/clfigueiredo/skills_forumtelecom
+Local clone: /root/src/skills_forumtelecom
