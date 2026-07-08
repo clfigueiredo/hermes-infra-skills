@@ -30,6 +30,7 @@ Backup versionado das skills de infraestrutura usadas pelo Hermes Agent.
   - Ubiquiti airMAX AC/M5
   - Datacom DmOS
   - Mimosa C5c/C5x/B5/A5 wireless
+  - TR-069 / ACS / GenieACS
 
 ## Restaurar em outro Hermes
 
