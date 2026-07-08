@@ -21,6 +21,7 @@ Backup versionado das skills de infraestrutura usadas pelo Hermes Agent.
   - FortiGate / FortiOS
   - OLT VSOL
   - OLT ZTE C300/C320
+  - OLT Intelbras EPON / OLT 4840 E
   - Firewall Blockbit
   - Agenda / calendário / lembretes
   - Financeiro administrativo
