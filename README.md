@@ -26,6 +26,8 @@ Backup versionado das skills de infraestrutura usadas pelo Hermes Agent.
   - Sophos Firewall / SFOS
   - TRENDnet switches
   - Ubiquiti airMAX AC/M5
+  - Datacom DmOS
+  - Mimosa C5c/C5x/B5/A5 wireless
 
 ## Restaurar em outro Hermes
 
