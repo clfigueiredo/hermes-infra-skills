@@ -11,6 +11,7 @@ Backup versionado das skills de infraestrutura usadas pelo Hermes Agent.
   - Docker
   - Cisco
   - Huawei NE
+  - Switch Huawei S6730/S6720
   - OLT Huawei
   - OLT FiberHome
   - OPNsense
