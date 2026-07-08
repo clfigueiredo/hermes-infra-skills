@@ -16,6 +16,7 @@ Backup versionado das skills de infraestrutura usadas pelo Hermes Agent.
   - OPNsense
   - VMware
   - Hyper-V
+  - FortiGate / FortiOS
 
 ## Restaurar em outro Hermes
 
