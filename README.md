@@ -19,6 +19,7 @@ Backup versionado das skills de infraestrutura usadas pelo Hermes Agent.
   - FortiGate / FortiOS
   - OLT VSOL
   - Firewall Blockbit
+  - Sophos Firewall / SFOS
 
 ## Restaurar em outro Hermes
 
