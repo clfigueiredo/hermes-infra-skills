@@ -10,6 +10,7 @@ Backup versionado das skills de infraestrutura usadas pelo Hermes Agent.
   - Proxmox
   - Docker
   - Cisco
+  - Cisco Catalyst switches
   - Huawei NE
   - Switch Huawei S6730/S6720
   - OLT Huawei
