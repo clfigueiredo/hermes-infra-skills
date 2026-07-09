@@ -60,8 +60,14 @@ Depois, no Hermes:
 
 ou reinicie o gateway/sessão.
 
+## Catálogo de skills
+
+Veja a página completa com explicação, uso e comando de acionamento de cada skill:
+
+- [SKILLS-CATALOG.md](SKILLS-CATALOG.md)
+
 ## Verificação
 
 ```bash
-find .hermes/skills/forumtelecom -name 'SKILL.md' -print
+find .hermes/skills -name 'SKILL.md' -print
 ```
