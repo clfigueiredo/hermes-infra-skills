@@ -1,6 +1,7 @@
 ---
 name: caveman-terse-mode
-description: Use quando o aluno quiser reduzir tokens/verbosidade do Hermes Agent sem perder conteúdo técnico. Ativa um modo de resposta ultra objetivo em PT-BR ou no idioma do usuário, preservando comandos, código, erros, nomes de APIs e avisos críticos. Inclui padrões para resposta curta, mensagens de commit, revisão de código e compressão segura de textos de memória/instruções.
+description: >
+  Use quando o aluno quiser reduzir tokens/verbosidade do Hermes Agent sem perder conteúdo técnico. Ativa um modo de resposta ultra objetivo em PT-BR ou no idioma do usuário, preservando comandos, código, erros, nomes de APIs e avisos críticos. Inclui padrões para resposta curta, mensagens de commit, revisão de código e compressão segura de textos de memória/instruções.
 version: 1.0.0
 author: Fórum Telecom / Hermes Course, adapted from JuliusBrussee/caveman
 license: MIT

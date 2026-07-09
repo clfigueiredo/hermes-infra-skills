@@ -23,8 +23,28 @@ Ou reinicie a sessão/gateway.
 
 | Skill | Uso |
 |---|---|
+| `vibe-coding-starter` | transformar ideia vaga em MVP validado |
+| `frontend-react-nextjs` | frontend React/Next.js, UI, estado, performance |
+| `frontend-browser-qa` | validação visual/browser/E2E básica |
+| `backend-api-patterns` | APIs, services, repositories, erros HTTP |
+| `database-postgres-prisma` | schema, migrations, queries, ORM |
+| `security-review-webapp` | revisão de segurança web/app/API |
+| `testing-quality-gates` | testes, build, lint, regressão, evidência |
+| `docker-deploy-basics` | Docker, Compose e deploy simples |
+| `github-workflow-student` | GitHub, branches, commits, PRs e CI básico |
+| `mcp-server-builder` | criação de MCP servers/tools para Hermes |
 | `caveman-terse-mode` | respostas curtas, economia de tokens, commits/reviews objetivos |
 
-## Observação
+## Organização
 
-Esta pasta é separada de `forumtelecom/`. Use `curso-hermes/` para skills didáticas gerais dos alunos; use `forumtelecom/` para operação de infraestrutura/telecom.
+Esta pasta é separada de `forumtelecom/`.
+
+- `curso-hermes/`: skills didáticas gerais dos alunos.
+- `forumtelecom/`: skills de operação de infraestrutura/telecom.
+
+## Fontes
+
+Algumas skills foram adaptadas/sintetizadas de projetos MIT públicos, com atribuição no próprio `SKILL.md`:
+
+- https://github.com/affaan-m/ecc
+- https://github.com/JuliusBrussee/caveman
