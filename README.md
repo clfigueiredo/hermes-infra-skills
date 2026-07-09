@@ -31,6 +31,7 @@ Backup versionado das skills de infraestrutura usadas pelo Hermes Agent.
   - Ubiquiti airMAX AC/M5
   - Datacom DmOS
   - Mimosa C5c/C5x/B5/A5 wireless
+  - Atendimento ISP N1/N2 via WhatsApp
   - TR-069 / ACS / GenieACS
   - Desenvolvimento web / sites premium
   - EVE-NG / UNetLab
