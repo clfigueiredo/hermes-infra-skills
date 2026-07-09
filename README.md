@@ -32,6 +32,7 @@ Backup versionado das skills de infraestrutura usadas pelo Hermes Agent.
   - Mimosa C5c/C5x/B5/A5 wireless
   - TR-069 / ACS / GenieACS
   - Desenvolvimento web / sites premium
+  - EVE-NG / UNetLab
 
 ## Restaurar em outro Hermes
 
