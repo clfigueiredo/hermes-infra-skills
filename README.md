@@ -62,7 +62,11 @@ ou reinicie o gateway/sessão.
 
 ## Catálogo de skills
 
-Veja a página completa com explicação, uso e comando de acionamento de cada skill:
+Página visual para alunos, com cards, exemplos e comandos de instalação:
+
+- [docs/index.html](docs/index.html)
+
+Catálogo Markdown completo com explicação, uso e comando de acionamento de cada skill:
 
 - [SKILLS-CATALOG.md](SKILLS-CATALOG.md)
 
