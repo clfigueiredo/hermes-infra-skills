@@ -57,7 +57,7 @@ O Hermes também pode carregar skills automaticamente quando a descrição da ta
 
 | Pasta | Quantidade | Finalidade |
 |---|---:|---|
-| `curso-hermes/` | 11 | Skills didáticas para alunos, vibe coding, desenvolvimento, segurança, testes e produtividade. |
+| `curso-hermes/` | 11 | Skills operacionais para alunos: vibe coding, desenvolvimento, segurança, testes, deploy, GitHub e MCP. |
 | `forumtelecom/` | 28 | Skills operacionais para infraestrutura, redes, telecom, virtualização, firewall, monitoramento e sistemas. |
 
 ## Índice rápido

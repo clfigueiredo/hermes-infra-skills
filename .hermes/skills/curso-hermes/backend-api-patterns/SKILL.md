@@ -75,4 +75,4 @@ Adaptado e sintetizado a partir de padrões do projeto MIT `affaan-m/ecc`:
 - Fonte: https://github.com/affaan-m/ecc
 - Licença original: MIT
 
-Esta versão foi reduzida, traduzida e ajustada para uso didático no Hermes Agent, sem hooks/instaladores externos.
+Esta versão foi reduzida, traduzida e ajustada para uso operacional no Hermes Agent, sem hooks/instaladores externos.

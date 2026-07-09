@@ -35,7 +35,7 @@ Use quando o usuário pedir:
 
 Não use como modo principal quando:
 
-- o usuário está aprendendo um assunto novo e precisa de explicação didática;
+- o usuário precisa de explicação mais detalhada para executar corretamente;
 - houver operação destrutiva/irreversível;
 - houver alerta de segurança sério;
 - a compressão puder criar ambiguidade de ordem ou causa;
@@ -156,7 +156,7 @@ Casos obrigatórios:
    4. Só então remover coluna antiga.
    ```
 
-4. **Aluno pediu didática**
+4. **Aluno pediu explicação detalhada**
 
    Use `lite`, não `ultra`.
 
@@ -304,7 +304,7 @@ Teste: usuário A tentando acessar usuário B deve receber 403.
 2. **Cortar contexto crítico.** Segurança, destruição de dados e ordem de comandos precisam clareza.
 3. **Abreviar demais.** Evite abreviações inventadas tipo `cfg`, `impl`, `req`, `res`; piora leitura e nem sempre economiza token.
 4. **Alterar código.** Nunca modifique conteúdo dentro de blocos de código ou crases ao compactar texto.
-5. **Responder seco para aluno iniciante.** Se for aula, use `lite` com frases curtas e didáticas.
+5. **Responder seco quando precisa orientar execução.** Se o aluno precisa fazer junto, use `lite` com frases curtas e acionáveis.
 
 ## Checklist de verificação
 
@@ -323,4 +323,4 @@ Adaptado do projeto MIT `JuliusBrussee/caveman`:
 - Fonte: https://github.com/JuliusBrussee/caveman
 - Licença original: MIT
 
-Esta versão remove instaladores, hooks e integrações externas para uso didático e seguro em Hermes Agent.
+Esta versão remove instaladores, hooks e integrações externas para uso operacional e seguro em Hermes Agent.

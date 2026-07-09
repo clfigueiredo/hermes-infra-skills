@@ -39,7 +39,7 @@ Ou reinicie a sessão/gateway.
 
 Esta pasta é separada de `forumtelecom/`.
 
-- `curso-hermes/`: skills didáticas gerais dos alunos.
+- `curso-hermes/`: skills operacionais gerais dos alunos.
 - `forumtelecom/`: skills de operação de infraestrutura/telecom.
 
 ## Fontes
