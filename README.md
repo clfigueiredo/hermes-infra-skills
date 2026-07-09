@@ -5,6 +5,7 @@ Backup versionado das skills de infraestrutura usadas pelo Hermes Agent.
 ## Conteúdo
 
 - `forumtelecom/`: skills de operação de infraestrutura/telecom
+- `curso-hermes/`: skills gerais para alunos do Hermes Agent, vibe coding, desenvolvimento, revisão, segurança e produtividade
   - MikroTik
   - Zabbix
   - Proxmox
@@ -39,8 +40,16 @@ Backup versionado das skills de infraestrutura usadas pelo Hermes Agent.
 A partir da raiz deste repositório:
 
 ```bash
-mkdir -p /root/.hermes/skills
-cp -a .hermes/skills/forumtelecom /root/.hermes/skills/
+mkdir -p ~/.hermes/skills
+cp -a .hermes/skills/forumtelecom ~/.hermes/skills/
+cp -a .hermes/skills/curso-hermes ~/.hermes/skills/
+```
+
+Para instalar só as skills de alunos:
+
+```bash
+mkdir -p ~/.hermes/skills
+cp -a .hermes/skills/curso-hermes ~/.hermes/skills/
 ```
 
 Depois, no Hermes:
