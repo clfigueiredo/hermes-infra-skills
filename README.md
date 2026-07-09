@@ -31,6 +31,7 @@ Backup versionado das skills de infraestrutura usadas pelo Hermes Agent.
   - Datacom DmOS
   - Mimosa C5c/C5x/B5/A5 wireless
   - TR-069 / ACS / GenieACS
+  - Desenvolvimento web / sites premium
 
 ## Restaurar em outro Hermes
 
