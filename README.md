@@ -35,6 +35,7 @@ Backup versionado das skills de infraestrutura usadas pelo Hermes Agent.
   - TR-069 / ACS / GenieACS
   - Desenvolvimento web / sites premium
   - EVE-NG / UNetLab
+  - Active Directory / Windows File Server
 
 ## Restaurar em outro Hermes
 
