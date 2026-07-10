@@ -42,13 +42,14 @@ Crie esta tela e valide build/teste.
 
 | Pasta | Quantidade | Finalidade |
 |---|---:|---|
-| `curso-hermes/` | 70 | Skills operacionais para alunos: vibe coding, frontend, backend, segurança, testes, deploy, GitHub, MCP e agentes convertidos. |
+| `curso-hermes/` | 71 | Skills operacionais para alunos: vibe coding, frontend, backend, segurança, testes, deploy, GitHub, MCP e agentes convertidos. |
 | `forumtelecom/` | 28 | Skills operacionais para infraestrutura, redes, telecom, virtualização, firewall, monitoramento e sistemas. |
 
 ## Índice rápido
 
 | Skill | Pasta | Para que serve |
 |---|---|---|
+| [`active-directory-automation`](#active-directory-automation) | `curso-hermes/` | Automatizar criação de usuários AD, grupos, compartilhamentos SMB e permissões NTFS com PowerShell seguro. |
 | [`accessibility`](#accessibility) | `curso-hermes/` | Design, implement, and audit inclusive digital products using WCAG 2.2 Level AA standards. Use this skill to generate semantic ARIA for Web and accessibility traits for Web and Native platforms (iOS/Android). |
 | [`agent-build-error-resolver`](#agent-build-error-resolver) | `curso-hermes/` | Use quando o aluno precisar do comportamento operacional do agente ECC `build-error-resolver`. Build and TypeScript error resolution specialist. Use PROACTIVELY when build fails or type errors occur. Fixes build/type errors only with minimal diffs, no architectural edits. Focuses on getting the build green quickly. |
 | [`agent-code-architect`](#agent-code-architect) | `curso-hermes/` | Use quando o aluno precisar do comportamento operacional do agente ECC `code-architect`. Designs feature architectures by analyzing existing codebase patterns and conventions, then providing implementation blueprints with concrete files, interfaces, data flow, and build order. |
@@ -149,6 +150,28 @@ Crie esta tela e valide build/teste.
 | [`zabbix-ops`](#zabbix-ops) | `forumtelecom/` | Senior Zabbix engineer for monitoring infrastructure (network devices, servers, containers) and creating templates programmatically while respecting API rate limits. Use when the user asks to query, configure, or troubleshoot Zabbix hosts, items, triggers, templates, problems, or maintenance windows; or to create/import templates in bulk respecting PHP-FPM and Postgres lock limits. Triggers include Zabbix, "zabbix api", "zabbix trigger", "zabbix template", "zabbix host", "zabbix problem", "zabbix maintenance", "zabbix snmp", "host está em problema", "criar template Zabbix", "criar template em massa", "import template Zabbix", "rate limit zabbix", "template.massadd", "configuration.import", Zabbix 6.x, Zabbix 7.x. |
 
 ## Curso Hermes / Operacional para alunos
+
+### `active-directory-automation`
+
+**Arquivo:** [`.hermes/skills/curso-hermes/active-directory-automation/SKILL.md`](https://github.com/clfigueiredo/hermes-infra-skills/blob/main/.hermes/skills/curso-hermes/active-directory-automation/SKILL.md)
+
+**O que faz:** Automatiza tarefas de Active Directory com PowerShell de forma segura: criação de usuários, grupos, liberação de pastas/compartilhamentos SMB e permissões NTFS.
+
+**Tags:** `curso-hermes`, `active-directory`, `windows-server`, `powershell`, `smb`, `ntfs`, `automation`
+
+**Quando usar:**
+- Criar usuários no Active Directory com validação e senha inicial segura.
+- Adicionar usuário a grupos e conferir associação.
+- Criar/liberar pastas de rede com permissões SMB e NTFS.
+- Gerar script PowerShell idempotente para automação AD.
+
+**Como acionar no Hermes:**
+```text
+/skill active-directory-automation
+Monte uma automação para criar usuário AD, adicionar grupos e liberar pasta de rede.
+```
+
+---
 
 ### `accessibility`
 
