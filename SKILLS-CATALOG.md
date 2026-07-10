@@ -49,7 +49,7 @@ Crie esta tela e valide build/teste.
 
 | Skill | Pasta | Para que serve |
 |---|---|---|
-| [`active-directory-automation`](#active-directory-automation) | `curso-hermes/` | Automatizar criação de usuários AD, grupos, compartilhamentos SMB e permissões NTFS com PowerShell seguro. |
+| [`active-directory-automation`](#active-directory-automation) | `curso-hermes/` | Automatizar criação de usuários AD, grupos, GPOs vinculadas a OUs, compartilhamentos SMB e permissões NTFS com PowerShell seguro. |
 | [`accessibility`](#accessibility) | `curso-hermes/` | Design, implement, and audit inclusive digital products using WCAG 2.2 Level AA standards. Use this skill to generate semantic ARIA for Web and accessibility traits for Web and Native platforms (iOS/Android). |
 | [`agent-build-error-resolver`](#agent-build-error-resolver) | `curso-hermes/` | Use quando o aluno precisar do comportamento operacional do agente ECC `build-error-resolver`. Build and TypeScript error resolution specialist. Use PROACTIVELY when build fails or type errors occur. Fixes build/type errors only with minimal diffs, no architectural edits. Focuses on getting the build green quickly. |
 | [`agent-code-architect`](#agent-code-architect) | `curso-hermes/` | Use quando o aluno precisar do comportamento operacional do agente ECC `code-architect`. Designs feature architectures by analyzing existing codebase patterns and conventions, then providing implementation blueprints with concrete files, interfaces, data flow, and build order. |

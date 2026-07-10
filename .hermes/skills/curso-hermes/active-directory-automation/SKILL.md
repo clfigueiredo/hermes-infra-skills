@@ -1,6 +1,6 @@
 ---
 name: active-directory-automation
-description: Automatizar tarefas de Active Directory com PowerShell de forma segura: criação de usuários, grupos, GPOs vinculadas a OUs, liberação de pastas/compartilhamentos SMB e permissões NTFS.
+description: "Automatizar tarefas de Active Directory com PowerShell de forma segura: criação de usuários, grupos, GPOs vinculadas a OUs, liberação de pastas/compartilhamentos SMB e permissões NTFS."
 version: 1.0.0
 author: Fórum Telecom / Hermes Course
 license: MIT
@@ -141,7 +141,74 @@ foreach ($Grupo in $Grupos) {
 Get-ADPrincipalGroupMembership $Sam | Select-Object Name | Sort-Object Name
 ```
 
-### 5. Criar pasta e liberar acesso
+### 5. GPO básica vinculada à OU
+
+Use este bloco quando o aluno pedir política de senha/local, script de logon, mapeamento de unidade, hardening básico ou padronização por OU. Para GPO em produção, primeiro consultar o que já existe e evitar sobrescrever política ampla do domínio.
+
+Pré-requisitos:
+
+```powershell
+Import-Module GroupPolicy
+Get-Command New-GPO, New-GPLink, Get-GPO, Get-GPInheritance
+```
+
+Levantamento antes de criar/vincular:
+
+```powershell
+$OU = "OU=Usuarios,DC=empresa,DC=local"
+Get-GPInheritance -Target $OU
+Get-GPO -All | Select-Object DisplayName,Owner,CreationTime,ModificationTime | Sort-Object DisplayName
+```
+
+Criar GPO e vincular à OU:
+
+```powershell
+$GpoName = "FT-Usuarios-Base"
+$OU = "OU=Usuarios,DC=empresa,DC=local"
+
+if (-not (Get-GPO -Name $GpoName -ErrorAction SilentlyContinue)) {
+  New-GPO -Name $GpoName -Comment "Criada via Hermes - política base de usuários" | Out-Null
+}
+
+# Vincula se ainda não estiver vinculada
+$Links = (Get-GPInheritance -Target $OU).GpoLinks.DisplayName
+if ($Links -notcontains $GpoName) {
+  New-GPLink -Name $GpoName -Target $OU -LinkEnabled Yes | Out-Null
+}
+
+Get-GPInheritance -Target $OU
+```
+
+Exemplo seguro de configuração via Registry Policy, sem mexer em política crítica de domínio:
+
+```powershell
+# Exemplo: desabilitar Windows Copilot para usuários da OU, ajuste conforme versão Windows/política interna
+Set-GPRegistryValue -Name $GpoName `
+  -Key "HKCU\Software\Policies\Microsoft\Windows\WindowsCopilot" `
+  -ValueName "TurnOffWindowsCopilot" `
+  -Type DWord `
+  -Value 1
+
+Get-GPRegistryValue -Name $GpoName -Key "HKCU\Software\Policies\Microsoft\Windows\WindowsCopilot"
+```
+
+Validação no cliente/usuário:
+
+```cmd
+gpupdate /force
+gpresult /r
+gpresult /h C:\Temp\gpresult.html
+```
+
+Cuidados com GPO:
+
+- Não alterar `Default Domain Policy` ou `Default Domain Controllers Policy` sem janela, backup e aprovação.
+- Preferir GPO nova, específica e vinculada à OU alvo.
+- Documentar filtro de segurança, WMI filter e escopo.
+- Validar herança/bloqueio de herança antes de culpar a GPO.
+- Usar grupo de teste antes de aplicar para todos os usuários.
+
+### 6. Criar pasta e liberar acesso
 
 Exemplo com pasta por usuário:
 

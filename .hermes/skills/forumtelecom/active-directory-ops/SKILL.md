@@ -364,6 +364,65 @@ Enable-ADAccount -Identity $Sam
 Get-ADUser $Sam -Properties Enabled,MemberOf | Select SamAccountName,Enabled
 ```
 
+## GPO básica para onboarding
+
+A skill também cobre orientação segura para GPO, principalmente quando o onboarding depende de política aplicada por OU ou grupo. Use GPO com leitura primeiro, backup e alteração pequena.
+
+Pré-requisitos:
+
+```powershell
+Import-Module GroupPolicy
+Get-Command Get-GPO, New-GPO, New-GPLink, Backup-GPO
+```
+
+Inventariar GPOs e links antes de mexer:
+
+```powershell
+# Listar GPOs
+Get-GPO -All | Select DisplayName,Id,Owner,GpoStatus,CreationTime,ModificationTime
+
+# Ver links em uma OU
+Get-GPInheritance -Target "OU=Usuarios,DC=empresa,DC=local" |
+  Select -ExpandProperty GpoLinks |
+  Select DisplayName,Enabled,Enforced,Order
+
+# Backup antes de alterar
+$BackupPath = "D:\Backups\GPO"
+New-Item -ItemType Directory -Path $BackupPath -Force | Out-Null
+Backup-GPO -All -Path $BackupPath
+```
+
+Criar e linkar uma GPO de onboarding, sem configurar itens perigosos automaticamente:
+
+```powershell
+$GpoName = "GPO-Usuarios-Onboarding"
+$TargetOU = "OU=Usuarios,DC=empresa,DC=local"
+
+if (-not (Get-GPO -Name $GpoName -ErrorAction SilentlyContinue)) {
+  New-GPO -Name $GpoName -Comment "Políticas padrão de onboarding de usuários"
+}
+
+# Linkar na OU; validar herança antes em produção
+New-GPLink -Name $GpoName -Target $TargetOU -LinkEnabled Yes
+Get-GPInheritance -Target $TargetOU | Select -ExpandProperty GpoLinks
+```
+
+Validar no cliente/usuário afetado:
+
+```cmd
+gpupdate /force
+gpresult /r
+gpresult /h C:\Temp\gpresult.html
+```
+
+Cuidados:
+
+- não alterar Default Domain Policy sem necessidade real;
+- preferir GPO nova, pequena e com nome claro;
+- testar em OU piloto antes de aplicar no domínio inteiro;
+- fazer backup/export antes de editar;
+- documentar quem pediu, alvo da OU, GPO criada e rollback.
+
 ## Integração Hermes → AD
 
 Opções comuns:
