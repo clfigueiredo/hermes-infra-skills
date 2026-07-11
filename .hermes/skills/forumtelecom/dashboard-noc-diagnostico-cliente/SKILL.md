@@ -33,6 +33,12 @@ Técnico informa login PPPoE
   -> relatório técnico com opinião
 ```
 
+## Artefatos publicados
+
+- Skill: `.hermes/skills/forumtelecom/dashboard-noc-diagnostico-cliente/SKILL.md`
+- Plugin de referência: `.hermes/skills/forumtelecom/dashboard-noc-diagnostico-cliente/references/noc_customer_diagnostics_plugin.py`
+- HTML da dashboard: `docs/dashboard-noc-diagnostico-cliente.html`
+
 ## Ferramentas criadas
 
 O plugin de referência fica em `references/noc_customer_diagnostics_plugin.py` e registra estas tools no toolset `noc_customer_diagnostics`:

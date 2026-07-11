@@ -70,6 +70,7 @@ Página visual para alunos, com cards, exemplos e comandos de instalação:
 
 - [docs/index.html](docs/index.html)
 - [docs/sgp-api-capabilities.html](docs/sgp-api-capabilities.html): mapa objetivo da API SGP analisada a partir da coleção Postman
+- [docs/dashboard-noc-diagnostico-cliente.html](docs/dashboard-noc-diagnostico-cliente.html): HTML da Dashboard NOC de diagnóstico por cliente
 
 ## MCP servers
 
