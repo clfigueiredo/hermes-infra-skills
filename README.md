@@ -36,6 +36,7 @@ Backup versionado das skills de infraestrutura usadas pelo Hermes Agent.
   - Desenvolvimento web / sites premium
   - EVE-NG / UNetLab
   - Active Directory / Windows File Server
+  - SGP Provedor / API ERP ISP
 
 ## Restaurar em outro Hermes
 
