@@ -1,0 +1,15 @@
+name: noc_customer_diagnostics
+version: 0.1.0
+description: "Ferramentas read-only para dashboard NOC de diagnóstico por cliente: PPPoE, logs de desconexão, sinal do AP, saúde da porta/cabo, DNS, HTTP/latência e relatório consolidado. Integra com uma API interna via NOC_DIAG_API_BASE_URL quando disponível."
+author: Hermes Tutor
+kind: standalone
+platforms:
+  - linux
+provides_tools:
+  - pppoe_lookup
+  - pppoe_disconnect_logs
+  - ap_client_signal
+  - ap_port_health
+  - dns_latency_test
+  - http_latency_test
+  - customer_connection_diagnostic

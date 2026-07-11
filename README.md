@@ -37,6 +37,7 @@ Backup versionado das skills de infraestrutura usadas pelo Hermes Agent.
   - EVE-NG / UNetLab
   - Active Directory / Windows File Server
   - SGP Provedor / API ERP ISP
+  - Dashboard NOC / diagnóstico por cliente PPPoE
 
 ## Restaurar em outro Hermes
 
