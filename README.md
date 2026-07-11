@@ -17,6 +17,7 @@ Backup versionado das skills de infraestrutura usadas pelo Hermes Agent.
   - OLT Huawei
   - OLT FiberHome
   - OPNsense
+  - pfSense
   - VMware
   - Hyper-V
   - FortiGate / FortiOS
@@ -75,6 +76,7 @@ Página visual para alunos, com cards, exemplos e comandos de instalação:
 ## MCP servers
 
 - [mcp/sgp-api-mcp](mcp/sgp-api-mcp): MCP server para integração segura com SGP Provedor/API ERP ISP
+- [mcp/pfsense-api-mcp](mcp/pfsense-api-mcp): MCP server read-first para pfSense REST API/pfrest
 
 Catálogo Markdown completo com explicação, uso e comando de acionamento de cada skill:
 

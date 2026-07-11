@@ -1,0 +1,9 @@
+[project]
+name = "pfsense-api-mcp"
+version = "0.1.0"
+description = "Read-first MCP server for pfSense REST API package/pfrest"
+requires-python = ">=3.10"
+dependencies = ["mcp>=1.0.0", "requests>=2.31.0"]
+
+[project.scripts]
+pfsense-api-mcp = "server:main"
