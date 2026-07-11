@@ -11,3 +11,6 @@
 *.p12
 *.pfx
 .env
+
+__pycache__/
+*.py[cod]
