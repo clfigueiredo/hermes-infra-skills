@@ -1,0 +1,9 @@
+[project]
+name = "sgp-api-mcp"
+version = "0.1.0"
+description = "MCP server for SGP Provedor API"
+requires-python = ">=3.10"
+dependencies = ["mcp>=1.0.0", "requests>=2.31.0"]
+
+[project.scripts]
+sgp-api-mcp = "server:main"

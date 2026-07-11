@@ -68,6 +68,11 @@ ou reinicie o gateway/sessão.
 Página visual para alunos, com cards, exemplos e comandos de instalação:
 
 - [docs/index.html](docs/index.html)
+- [docs/sgp-api-capabilities.html](docs/sgp-api-capabilities.html): mapa objetivo da API SGP analisada a partir da coleção Postman
+
+## MCP servers
+
+- [mcp/sgp-api-mcp](mcp/sgp-api-mcp): MCP server para integração segura com SGP Provedor/API ERP ISP
 
 Catálogo Markdown completo com explicação, uso e comando de acionamento de cada skill:
 

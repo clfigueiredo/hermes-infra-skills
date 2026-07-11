@@ -1,0 +1,260 @@
+# SGP API — análise da coleção Postman
+Fonte: https://documenter.getpostman.com/view/6682240/2sB34hHg2V
+Total: 237 endpoints.
+## Autenticações identificadas
+- Basic Auth: usuário/senha do SGP.
+- Token/app: token gerado em Sistema/Ferramentas/Painel Admin/Tokens.
+- Central do Assinante: CPF/CNPJ e senha da central do cliente.
+## Categorias
+- CRM: 12 endpoints
+- Central Assinante: 33 endpoints
+- Estoque: 32 endpoints
+- FTTH: 29 endpoints
+- Gerenciador CPE: 12 endpoints
+- Ordem de Serviço: 26 endpoints
+- Outros: 1 endpoints
+- Pré-Cadastro: 5 endpoints
+- RADIUS: 5 endpoints
+- Remessa / Retorno: 2 endpoints
+- Suporte: 9 endpoints
+- Termo de Aceite: 2 endpoints
+- URA: 69 endpoints
+
+## Endpoint list
+- [Central Assinante] POST `/api/central/contratos` — Contrato - Listar — auth: collection/body — consulta
+- [Central Assinante] POST `/api/central/verificaacesso/` — Serviço Internet – Verificar disponibilidade — auth: collection/body — consulta
+- [Central Assinante] POST `/api/central/extratouso/` — Serviço Internet – Extrato de Tráfego — auth: collection/body — consulta
+- [Central Assinante] POST `/api/central/promessapagamento/` — Contrato – Liberação por Confiança — auth: collection/body — ESCRITA/PERIGO
+- [Central Assinante] POST `/api/central/chamado/list/` — Chamado – Listar — auth: collection/body — consulta
+- [Central Assinante] POST `/api/central/tipoocorrencia/list/` — Tipos de Ocorrência – Listar — auth: collection/body — consulta
+- [Central Assinante] POST `/api/central/chamado/` — Chamado – Criar — auth: collection/body — ESCRITA/PERIGO
+- [Central Assinante] POST `/api/central/chamado/update/{os_id}/` — Chamado – Atualizar — auth: collection/body — ESCRITA/PERIGO
+- [Central Assinante] POST `/api/central/chamado/{os_id}/anexo/add/` — Chamado – Adicionar Anexo — auth: collection/body — ESCRITA/PERIGO
+- [Central Assinante] POST `/api/central/chamado/{os_id}/anotacao` — Ordem de Serviço – Adicionar Anotação — auth: collection/body — consulta
+- [Central Assinante] POST `/api/central/notafiscal/list/` — Nota Fiscal – Listar — auth: collection/body — consulta
+- [Central Assinante] POST `/api/central/nfcom/list` — NFCom - Listar — auth: collection/body — consulta
+- [Central Assinante] POST `/api/central/nfcom/print/{{numero_nota}}` — NFCom - Baixar — auth: collection/body — consulta
+- [Central Assinante] POST `/api/central/nfcom/enviar/{{id_nota}}` — NFCom - Enviar — auth: collection/body — consulta
+- [Central Assinante] POST `/api/central/nfse/list/` — NFSe – Listar — auth: collection/body — consulta
+- [Central Assinante] POST `/api/central/nfse/enviar/{{id_nota}}` — NFSe - Enviar — auth: collection/body — consulta
+- [Central Assinante] POST `/api/central/titulos/` — Fatura – Listar — auth: collection/body — consulta
+- [Central Assinante] POST `/api/central/fatura2via/` — Fatura – Segunda via — auth: collection/body — consulta
+- [Central Assinante] POST `/api/central/pagamento/pix/{id_titulo}` — Fatura – Gerar PIX — auth: collection/body — ESCRITA/PERIGO
+- [Central Assinante] POST `/api/central/envia2via/` — Fatura – Enviar — auth: collection/body — consulta
+- [Central Assinante] POST `/api/central/pagamento/cartao/{titulo_id}` — Fatura - Pagar via Cartão de Crédito — auth: collection/body — ESCRITA/PERIGO
+- [Central Assinante] POST `/api/central/pagamento/cartao/{titulo_id}/debito/` — Fatura - Pagar via Cartão de Débito — auth: collection/body — ESCRITA/PERIGO
+- [Central Assinante] POST `/api/central/pagamento/checkout/{titulo_id}/cartao/` — Fatura - Pagar via Cartão Checkout — auth: collection/body — ESCRITA/PERIGO
+- [Central Assinante] POST `/api/centralapp/gatewaycartao/list/` — Gateway Cartão - Listar — auth: basic — consulta
+- [Central Assinante] POST `/api/centralapp/cadastrarcartao/` — Cartão de Crédito - Cadastrar — auth: basic — ESCRITA/PERIGO
+- [Central Assinante] DELETE `/api/centralapp/deletecartao/{id_cartao}/` — Cartão de Crédito - Delete — auth: noauth — ESCRITA/PERIGO
+- [Central Assinante] POST `/api/centralapp/cartao/{id_cartao}/cobrancarecorrente/add/` — Cobrança Recorrente - Cadastrar — auth: basic — ESCRITA/PERIGO
+- [Central Assinante] POST `/api/centralapp/cartao/{id_cartao}/cobrancarecorrente/delete/` — Cobrança Recorrente - Delete — auth: basic — ESCRITA/PERIGO
+- [Central Assinante] GET `/api/centralapp/declaracao/quitacao/2026/` — Declaração de Quitação - Baixar — auth: collection/body — consulta
+- [Central Assinante] POST `/api/centralapp/assinaturas/{id_assinatura/detail/` — Assinatura - Detalhe — auth: collection/body — consulta
+- [Central Assinante] POST `/api/centralapp/assinaturas/list` — Assinaturas - Listar — auth: collection/body — consulta
+- [Central Assinante] GET `/api/centralapp/contrato/print/{tipo}/` — Contrato - PDF — auth: collection/body — consulta
+- [Central Assinante] GET `/api/centralapp/avisos/servico/list/` — Avisos - Listar — auth: collection/body — consulta
+- [Remessa / Retorno] POST `/api/banco/remessa/download/` — Download Remessa — auth: collection/body — consulta
+- [Remessa / Retorno] POST `/api/banco/retorno/upload/` — Upload Retorno — auth: collection/body — ESCRITA/PERIGO
+- [FTTH] GET `/api/fttx/olt/list/` — Listar OLT — auth: basic — consulta
+- [FTTH] GET `/api/fttx/olt/{olt_id}/pon/list/` — Listar PON — auth: basic — consulta
+- [FTTH] GET `/api/fttx/olt/{olt_id}/onu/list/` — Listar ONU por OLT — auth: basic — consulta
+- [FTTH] GET `/api/fttx/onu/list/` — Listar ONU — auth: basic — consulta
+- [FTTH] GET `/api/fttx/olt/pon/{OLT_ID}/splitter/list/` — Listar CTO utilizadas na OLT — auth: basic — consulta
+- [FTTH] GET `/api/fttx/splitter/{cto_id}/onu/all/` — Listar ONUs vinculadas a CTO — auth: basic — consulta
+- [FTTH] GET `/api/fttx/splitter/{id}/` — Listar CTO — auth: basic — consulta
+- [FTTH] GET `/api/fttx/splitter/all/` — Listar todas CTO — auth: basic — consulta
+- [FTTH] GET `/api/fttx/olt/{olt_id}/unauth/` — Listar ONUs não autorizadas — auth: basic — ESCRITA/PERIGO
+- [FTTH] POST `/api/fttx/olt/{olt_id}/auth/` — Autorizar ONU — auth: basic — ESCRITA/PERIGO
+- [FTTH] GET `/api/fttx/onu/{id_onu}/reset/` — Resetar ONU — auth: basic — ESCRITA/PERIGO
+- [FTTH] GET `/api/fttx/olt/{olt_id}/onu/export/` — Exportar ONU — auth: basic — consulta
+- [FTTH] GET `/api/fttx/onu/{id_onu}/info/` — ONU Info — auth: basic — consulta
+- [FTTH] GET `/api/fttx/onu/{id_onu}/` — ONU Detalhe — auth: basic — consulta
+- [FTTH] POST `/api/fttx/onu/{onu_id}/edit/` — Alterar ONU — auth: basic — ESCRITA/PERIGO
+- [FTTH] GET `/api/fttx/onu/{id_onu}/deauth/` — Remover ONU — auth: basic — ESCRITA/PERIGO
+- [FTTH] POST `/api/fttx/onu/{id_onu}/deauth/` — Remover ONU — auth: basic — ESCRITA/PERIGO
+- [FTTH] GET `/api/fttx/onu/{identificador_onu}/wifi/` — ONU Wifi — auth: basic — consulta
+- [FTTH] GET `/api/fttx/onu/{identificador_onu}/wan/` — ONU WAN — auth: basic — consulta
+- [FTTH] GET `/api/fttx/onu/{IDENTIFICADOR_ONU}/cmd/{CMD_ID}/` — ONU CMD — auth: collection/body — consulta
+- [FTTH] POST `/api/fttx/onu/{IDENTIFICADOR_ONU}/cmd/{CMD_ID}/` — ONU CMD — auth: collection/body — consulta
+- [FTTH] GET `/api/fttx/onu/{IDENTIFICADOR_ONU}/tl1/cmd/` — ONU TL1 CMD — auth: collection/body — consulta
+- [FTTH] GET `/api/fttx/onu/history/` — ONU Histórico — auth: collection/body — consulta
+- [FTTH] POST `/api/fttx/splitter/add/` — Cadastrar CTO — auth: collection/body — ESCRITA/PERIGO
+- [FTTH] GET `/api/fttx/onutemplate/list/` — ONU Template — auth: collection/body — consulta
+- [FTTH] GET `/api/fttx/onutype/list/` — ONU Tipo — auth: collection/body — consulta
+- [FTTH] GET `/api/fttx/onumode/list/` — ONU Modo — auth: collection/body — consulta
+- [FTTH] GET `/api/fttx/service/list/` — Serviços — auth: collection/body — consulta
+- [FTTH] POST `/ws/fttx/splitter/service/add/` — Adicionar CTO ao Serviço — auth: basic — ESCRITA/PERIGO
+- [Estoque] GET `/api/estoque/empresa/list/` — Empresa – Listar — auth: basic — consulta
+- [Estoque] GET `/api/estoque/fornecedor/list/` — Fornecedor – Listar — auth: basic — consulta
+- [Estoque] GET `/api/estoque/categoria/list/?nome` — Categoria – Listar — auth: basic — consulta
+- [Estoque] GET `/api/estoque/fabricante/list/` — Fabricante – Listar — auth: basic — consulta
+- [Estoque] GET `/api/estoque/ncm/list/` — NCM – Listar — auth: basic — consulta
+- [Estoque] GET `/api/estoque/kitinstalacao/list/` — Kit de Instalação – Listar — auth: basic — consulta
+- [Estoque] GET `/api/estoque/kitinstalacaoproduto/list/` — Produtos de Kit – Listar — auth: basic — consulta
+- [Estoque] GET `/api/estoque/comodato/list/` — Comodato de Cliente – Listar — auth: basic — consulta
+- [Estoque] GET `/api/estoque/comodatoitens/list/` — Itens da Comodato – Listar — auth: basic — consulta
+- [Estoque] GET `/api/estoque/venda/list/` — Venda de Cliente – Listar — auth: basic — consulta
+- [Estoque] GET `/api/estoque/vendaitens/list/` — Itens da Venda – Listar — auth: basic — consulta
+- [Estoque] GET `/api/estoque/lancamento/list/` — Lançamento – Listar — auth: basic — consulta
+- [Estoque] GET `/api/estoque/lancamentoitem/list/` — Itens do Lançamento – Listar — auth: basic — consulta
+- [Estoque] GET `/api/estoque/estoque/list/` — Local de Estoque – Listar — auth: basic — consulta
+- [Estoque] GET `/api/estoque/estoque_agregado_referencias/list/` — Saldo – Listar — auth: basic — consulta
+- [Estoque] GET `/api/estoque/produto/list/` — Produto – Listar (Quantitativos) — auth: basic — consulta
+- [Estoque] GET `/api/estoque/produto/list/all/` — Produto – Listar (Cadastrados) — auth: basic — consulta
+- [Estoque] GET `/api/estoque/unidademedida/list/` — Unidades de Medidas - Listar — auth: basic — consulta
+- [Estoque] GET `/api/estoque/compra/list/` — Compras - Listar — auth: basic — consulta
+- [Estoque] GET `/api/estoque/compraitens/list/` — Itens da Compra - Listar — auth: basic — consulta
+- [Estoque] GET `/api/estoque/transferencia/list/` — Transferências - Listar — auth: collection/body — ESCRITA/PERIGO
+- [Estoque] POST `/api/estoque/lancamentoitem/create/` — Lançamento – Criar — auth: basic — ESCRITA/PERIGO
+- [Estoque] POST `/api/estoque/lancamentoitem/estorno/` — Estorno – Atualizar — auth: basic — ESCRITA/PERIGO
+- [Estoque] POST `/api/estoque/produto/create/` — Produto - Cadastrar — auth: basic — ESCRITA/PERIGO
+- [Estoque] POST `/api/estoque/produto/{produto_id}/update/` — Produto - Alterar — auth: basic — ESCRITA/PERIGO
+- [Estoque] POST `/api/estoque/compra/create/` — Compra - Cadastrar — auth: basic — ESCRITA/PERIGO
+- [Estoque] POST `/api/estoque/transferencia/create/` — Transferência - Cadastrar — auth: basic — ESCRITA/PERIGO
+- [Estoque] POST `/api/ura/produtonfe_produtoestoque/vincular/` — Vincular Produto NFe X Produto Estoque — auth: basic — ESCRITA/PERIGO
+- [Estoque] PATCH `/api/ura/produtonfe_produtoestoque/vincular/` — Vincular Produto NFe X Produto Estoque  Patch — auth: basic — ESCRITA/PERIGO
+- [Estoque] POST `/api/ura/compra/nfe/` — Compra - NFe — auth: basic — consulta
+- [Estoque] POST `/api/estoque/fornecedor/create/` — Fornecedor - Cadastrar — auth: basic — ESCRITA/PERIGO
+- [Estoque] POST `/api/estoque/fornecedor/<fornecedor_id>/update/` — Fornecedor - Alterar — auth: basic — ESCRITA/PERIGO
+- [Termo de Aceite] GET `/api/contrato/termoaceite/{idcontrato}/` — Termo Exibir — auth: basic — consulta
+- [Termo de Aceite] POST `/api/contrato/termoaceite/{idcontrato}` — Termo Aceitar — auth: basic — ESCRITA/PERIGO
+- [URA] POST `/api/ura/clientes/` — Cliente – Listar — auth: basic — consulta
+- [URA] POST `/api/ura/listacliente/` — Cliente – Listagem Resumida — auth: basic — consulta
+- [URA] POST `/api/ura/consultacliente/` — Cliente – Consultar — auth: basic — consulta
+- [URA] POST `/api/ura/clientes/semfatura/` — Cliente - Sem Fatura — auth: basic — consulta
+- [URA] POST `/api/ura/contato/add/` — Contato – Criar — auth: basic — ESCRITA/PERIGO
+- [URA] POST `/api/ura/viabilidade/` — Viabilidade – Consultar — auth: basic — consulta
+- [URA] GET `/api/ura/viabilidadeinstalacao` — Viabilidade – Consultar via Gateway — auth: basic — consulta
+- [URA] POST `/api/ura/listacontrato/` — Contrato – Listar — auth: basic — consulta
+- [URA] POST `/api/ura/contrato/edit/` — Contrato – Atualizar — auth: basic — ESCRITA/PERIGO
+- [URA] GET `/api/contratos/print/{tipo_contrato}` — Contrato – Imprimir — auth: noauth — consulta
+- [URA] POST `/api/ura/liberacaopromessa/` — Contrato – Liberação por Confiança — auth: basic — ESCRITA/PERIGO
+- [URA] POST `/api/ura/verificaacesso/` — Serviço Internet – Verificar disponibilidade — auth: basic — consulta
+- [URA] GET `/api/ura/portador/` — Portador – Listar — auth: basic — consulta
+- [URA] POST `/api/ura/contrato/status/motivos/` — Motivos de Status – Listar — auth: basic — consulta
+- [URA] POST `/api/ura/contrato/status/edit/` — Status do Contrato – Atualizar — auth: basic — ESCRITA/PERIGO
+- [URA] POST `/api/ura/cliente/servico/senha/edit/` — Senha do Serviço – Atualizar — auth: basic — ESCRITA/PERIGO
+- [URA] GET `/api/ura/cpemanage/` — CPE Manage – Consultar — auth: collection/body — consulta
+- [URA] POST `/api/ura/cpemanage/` — CPE Manage – Atualizar — auth: collection/body — ESCRITA/PERIGO
+- [URA] GET `/api/ura/consultaplano/` — Plano – Listar — auth: basic — consulta
+- [URA] GET `/api/model/feriado/` — Feriado – Listar — auth: collection/body — consulta
+- [URA] GET `/api/ura/classificacoes/list/` — Classificação - Listar — auth: collection/body — consulta
+- [URA] POST `/api/ura/configuracoes/` — Configurações (Variáveis) – Listar — auth: collection/body — consulta
+- [URA] POST `/api/ura/notificacaosistema/` — Notificação no Sistema – Criar — auth: basic — ESCRITA/PERIGO
+- [URA] POST `/api/ura/ocorrencia/list/` — Ocorrência – Listar — auth: basic — consulta
+- [URA] POST `/api/ura/ordemservico/list/` — Ordem de Serviço – Listar — auth: basic — consulta
+- [URA] GET `/api/ura/ocorrencia/metodo/list/` — Método de Ocorrência – Listar — auth: basic — consulta
+- [URA] POST `/api/ura/tecnicos/` — Técnico – Listar — auth: basic — consulta
+- [URA] POST `/api/ura/chamado/` — Chamado – Criar — auth: basic — ESCRITA/PERIGO
+- [URA] POST `/api/ura/audio/add/` — Chamado – Anexar Áudio — auth: basic — ESCRITA/PERIGO
+- [URA] POST `/api/ura/pops/` — POP – Listar — auth: basic — consulta
+- [URA] POST `/api/ura/empresas/` — Empresa – Listar — auth: basic — consulta
+- [URA] POST `/api/ura/fornecedores/` — Fornecedor – Listar — auth: basic — consulta
+- [URA] POST `/api/ura/contas/tiposdocumentos/` — Tipo de Documento (Conta) – Listar — auth: basic — consulta
+- [URA] POST `/api/ura/contas/{tipo}/` — Conta à Pagar/Receber – Listar — auth: basic — consulta
+- [URA] POST `/api/ura/planoscontas/` — Plano de Contas – Listar — auth: basic — consulta
+- [URA] POST `/api/ura/pontosrecebimentos/` — Ponto de Recebimento – Listar — auth: basic — consulta
+- [URA] POST `/api/ura/titulos/` — Fatura – Listar — auth: basic — consulta
+- [URA] POST `/api/ura/fatura2via/` — Fatura – Segunda via — auth: basic — consulta
+- [URA] POST `/api/ura/pagamento/pix/{fatura}` — Fatura – Gerar PIX — auth: basic — ESCRITA/PERIGO
+- [URA] POST `/api/ura/enviafatura/` — Fatura – Enviar — auth: basic — consulta
+- [URA] POST `/api/banco/titulo/{fatura_id}/baixar/` — Fatura – Liquidar — auth: collection/body — consulta
+- [URA] POST `/api/banco/titulo/{fatura_id}/estornar/` — Fatura – Estornar — auth: collection/body — consulta
+- [URA] POST `/api/banco/titulo/{fatura_id}/pagamento/list` — Fatura – Listar lançamentos de caixa (Liquidação parcial) — auth: collection/body — ESCRITA/PERIGO
+- [URA] POST `/api/banco/titulo/{fatura_id}/cancelar/` — Fatura – Cancelar — auth: collection/body — consulta
+- [URA] POST `/api/banco/titulo/{fatura_id}/descancelar/` — Fatura – Descancelar — auth: collection/body — consulta
+- [URA] POST `/api/ura/cliente/mensalidade/avulsa/add/` — Fatura – Gerar Mensalidade — auth: basic — ESCRITA/PERIGO
+- [URA] POST `/api/ura/cliente/titulo/avulso/add/` — Fatura - Gerar Título — auth: collection/body — ESCRITA/PERIGO
+- [URA] POST `/api/ura/acordopagamento` — Fatura – Gerar Acordo de Pagamento — auth: basic — ESCRITA/PERIGO
+- [URA] POST `/api/ura/nfe/list/` — NFe - Listar — auth: basic — consulta
+- [URA] POST `/api/ura/nfe/importar/` — NFe - Importar — auth: basic — consulta
+- [URA] POST `/api/ura/nfe/enviar/{{id_nota}}` — NFe - Enviar — auth: collection/body — consulta
+- [URA] POST `/api/ura/nas/list/` — NAS - Listar — auth: basic — consulta
+- [URA] GET `/api/sms/gateway/list/` — SMS - Gateways — auth: basic — consulta
+- [URA] GET `/api/sms/send/` — SMS - Enviar — auth: basic — consulta
+- [URA] GET `/api/ura/manutencao/list/` — Manutenção - Listar — auth: collection/body — consulta
+- [URA] POST `/api/ura/manutencao/add/` — Manutenção - Cadastrar — auth: collection/body — ESCRITA/PERIGO
+- [URA] POST `/api/ura/manutencao/edit/` — Manutenção - Alterar — auth: collection/body — ESCRITA/PERIGO
+- [URA] POST `/api/ura/manutencao/delete/` — Manutenção - Deletar — auth: collection/body — ESCRITA/PERIGO
+- [URA] GET `/api/ura/ap/list/` — AP - Listar — auth: collection/body — consulta
+- [URA] GET `/api/ura/fonte/list/` — Fonte - Listar — auth: collection/body — consulta
+- [URA] GET `/api/ura/switch/list/` — Switch - Listar — auth: collection/body — consulta
+- [URA] GET `/api/ura/documento/consulta/gateway/{id_gateway}/?documento=&uf=&adicionais=` — Proteção de Crédito - Consulta Documento — auth: basic — consulta
+- [URA] GET `/api/ura/consulta/adicionais/gateway/{id_gateway}/?tipo_pessoa` — Proteção de Crédito - Adicionais — auth: basic — consulta
+- [URA] GET `/api/ura/gatewaysserasa/list` — Proteção de Crédito - Listar Gateways — auth: basic — consulta
+- [URA] POST `/api/ura/cliente/anotacao/add` — Anotações - Adicionar — auth: basic — ESCRITA/PERIGO
+- [URA] GET `/api/ura/cliente/anotacao/list` — Anotações - Listar/Consultar — auth: basic — consulta
+- [URA] POST `/api/ura/cliente/anotacao/{id}/edit` — Anotações - Atualizar — auth: basic — ESCRITA/PERIGO
+- [URA] POST `/api/ura/cliente/anotacao/{id}/remove/` — Anotação - Remover — auth: basic — ESCRITA/PERIGO
+- [URA] GET `/api/ura/listgatewaymapa` — Mapa FTTH - Listar Gateways — auth: basic — consulta
+- [CRM] GET `/api/crm/cliente/{{cliente_id}}/` — Consulta Cliente - Cliente ID — auth: collection/body — consulta
+- [CRM] GET `/api/crm/cliente/?cpfcnpj` — Consulta Cliente - CPFCNPJ — auth: collection/body — consulta
+- [CRM] GET `/api/crm/cliente/{{cliente_id}}/contratos/` — Consulta Contratos - Por Cliente ID — auth: collection/body — consulta
+- [CRM] GET `/api/crm/cliente/contratos/?cpfcnpj` — Consulta Contratos - Por CPFCNPJ do Cliente — auth: collection/body — consulta
+- [CRM] POST `/api/crm/cliente/F` — Cliente - Cadastrar Pessoa Física — auth: collection/body — ESCRITA/PERIGO
+- [CRM] POST `/api/crm/cliente/J` — Cliente - Cadastrar Pessoa Jurídica — auth: collection/body — ESCRITA/PERIGO
+- [CRM] POST `/api/crm/cliente/E` — Cliente - Cadastrar Pessoa Estrangeira — auth: collection/body — ESCRITA/PERIGO
+- [CRM] POST `/api/crm/cliente/EJ` — Cliente - Cadastrar Pessoa Jurídica Estrangeira — auth: collection/body — ESCRITA/PERIGO
+- [CRM] POST `/api/crm/cliente/{{cliente_id}}/contratos` — Contrato - Cadastro por Cliente ID — auth: collection/body — consulta
+- [CRM] POST `/api/crm/cliente/contratos/?cpfcnpj` — Contrato - Cadastro por CPFCNPJ Cliente — auth: collection/body — consulta
+- [CRM] POST `/api/crm/cliente/{{cliente_id}}/status/` — Status CRM - Alterar por Cliente ID — auth: collection/body — ESCRITA/PERIGO
+- [CRM] POST `/api/crm/cliente/status/?cpfcnpj` — Status CRM - Alterar por Cliente CPFCNPJ — auth: collection/body — ESCRITA/PERIGO
+- [Pré-Cadastro] POST `/api/precadastro/plano/list` — Plano – Listar — auth: collection/body — consulta
+- [Pré-Cadastro] POST `/api/precadastro/vencimento/list` — Vencimento – Listar — auth: collection/body — consulta
+- [Pré-Cadastro] POST `/api/precadastro/vendedor/list` — Vendedor – Listar — auth: collection/body — consulta
+- [Pré-Cadastro] POST `/api/precadastro/F` — Pré-Cadastro – Cadastrar PF — auth: collection/body — ESCRITA/PERIGO
+- [Pré-Cadastro] POST `/api/precadastro/J` — Pré-Cadastro – Cadastrar PJ — auth: collection/body — ESCRITA/PERIGO
+- [RADIUS] POST `/ws/radius/radacct/list/all/` — Login PPPoE – Listar — auth: basic — consulta
+- [RADIUS] POST `/ws/radius/service/status/` — Login PPPoE – Detalhar Status — auth: basic — consulta
+- [RADIUS] POST `/ws/radius/disconnect/` — Login PPPoE – Desconectar — auth: basic — ESCRITA/PERIGO
+- [RADIUS] POST `/ws/radius/{param}/list/` — Radius – Check Replies — auth: basic — consulta
+- [RADIUS] GET `/ws/radius/log/` — Radius – Log — auth: basic — consulta
+- [Ordem de Serviço] POST `/api/os/list/` — Ordens de Serviço — auth: basic — consulta
+- [Ordem de Serviço] POST `/api/os/list/id/{os_id}` — Ordem de Serviço por ID — auth: basic — consulta
+- [Ordem de Serviço] POST `/api/os/list/total/` — Ordens de Serviço Total — auth: basic — consulta
+- [Ordem de Serviço] POST `/api/os/update/id/{os_id}/` — Alterar Ordem de Serviço — auth: basic — ESCRITA/PERIGO
+- [Ordem de Serviço] POST `/api/os/acaminho/id/{os_id}/` — Ordem de Serviço - A caminho — auth: basic — consulta
+- [Ordem de Serviço] GET `/api/os/print/id/{os_id}/` — Imprimir Ordem de Serviço — auth: basic — consulta
+- [Ordem de Serviço] PUT `/api/os/imagem/id/{os_id}/add/` — Ordem de Serviço - Anexar Imagem — auth: basic — ESCRITA/PERIGO
+- [Ordem de Serviço] POST `/api/os/{os_id}/imagem/edit/` — Ordem de Serviço - Alterar descrição da imagem — auth: basic — ESCRITA/PERIGO
+- [Ordem de Serviço] POST `/api/os/{os_id}/imagem/detail/` — Ordem de Serviço - Imagem — auth: basic — consulta
+- [Ordem de Serviço] GET `/api/os/imagem/id/{os_id}/list/` — Ordem de Serviço - Imagens — auth: basic — consulta
+- [Ordem de Serviço] GET `/api/os/imagem/{anexo_id}` — Ordem de Serviço - Visualizar Anexo por ID — auth: basic — ESCRITA/PERIGO
+- [Ordem de Serviço] GET `/api/os/imagem/{imagem_id}/delete/` — Ordem de Serviço - Remover Imagem — auth: basic — ESCRITA/PERIGO
+- [Ordem de Serviço] POST `/api/os/servico/update/id/{os_id}/` — Ordem de Serviço - Alterar Serviço — auth: basic — ESCRITA/PERIGO
+- [Ordem de Serviço] POST `/api/os/anotacoes/list/id/{os_id}/` — Ordem de Serviço - Anotações — auth: basic — consulta
+- [Ordem de Serviço] POST `/api/os/anotacoes/add/id/{os_id}/` — Ordem de Serviço - Cadastrar Anotação — auth: basic — ESCRITA/PERIGO
+- [Ordem de Serviço] POST `/api/os/ocorrencia/comentario/list/id/{os_id}/` — Ordem de Serviço - Comentários (Ocorrência) — auth: basic — consulta
+- [Ordem de Serviço] POST `/api/os/ocorrencia/comentario/add/id/{os_id}/` — Ordem de Serviço - Cadastrar Comentário (Ocorrência) — auth: basic — ESCRITA/PERIGO
+- [Ordem de Serviço] GET `/api/os/{os_id}/checklist/list/` — Ordem de Serviço - Checklist — auth: basic — consulta
+- [Ordem de Serviço] POST `/api/os/checklist/{checklist_id}/toggle/` — Ordem de Serviço - Marcar/Desmarcar Checklist — auth: basic — consulta
+- [Ordem de Serviço] GET `/api/os/{os_id}/comentario/list/` — Ordem de Serviço - Comentários — auth: collection/body — consulta
+- [Ordem de Serviço] POST `/api/os/{os_id}/comentario/add/` — Ordem de Serviço - Cadastrar Comentário — auth: collection/body — ESCRITA/PERIGO
+- [Ordem de Serviço] POST `/ws/os/{os_id}/comentario/delete/` — Ordem de Serviço - Excluir Comentário — auth: basic — ESCRITA/PERIGO
+- [Ordem de Serviço] GET `/api/os/ocorrencia/motivo/list/` — Motivos — auth: basic — consulta
+- [Ordem de Serviço] GET `/api/os/ocorrencia/metodo/list/` — Métodos — auth: basic — consulta
+- [Ordem de Serviço] GET `/api/os/ocorrencia/tipo/list/` — Tipos — auth: basic — consulta
+- [Ordem de Serviço] GET `/api/os/ocorrencia/setor/list/` — Setores — auth: basic — consulta
+- [Suporte] POST `/api/suporte/service/update/{servico_id}/` — Serviço - Alterar — auth: basic — ESCRITA/PERIGO
+- [Suporte] POST `/api/servico/generico` — Serviço Genérico - Criar — auth: noauth — ESCRITA/PERIGO
+- [Suporte] DELETE `/api/servico/generico/{id}` — Serviço Genérico - Deletar — auth: noauth — ESCRITA/PERIGO
+- [Suporte] POST `/api/suporte/contrato/list/` — Contratos — auth: basic — consulta
+- [Suporte] PUT `/api/suporte/cliente/{cliente_id}/documento/add/` — Cadastrar Cliente Documento — auth: basic — ESCRITA/PERIGO
+- [Suporte] POST `/api/suporte/cliente/{cliente_id}/documento/edit/` — Alterar Cliente Documento — auth: basic — ESCRITA/PERIGO
+- [Suporte] POST `/api/suporte/cliente/{cliente_id}/documento/detail/` — Cliente Documento — auth: basic — consulta
+- [Suporte] GET `/api/suporte/cliente/{cliente_id}/documento/list/` — Cliente Documentos — auth: basic — consulta
+- [Suporte] GET `/api/suporte/cliente/{documento_id}/documento/delete/` — Remover Cliente Documento — auth: basic — ESCRITA/PERIGO
+- [Outros] GET `/api/auth/info/` — Informações do usuário — auth: basic — ESCRITA/PERIGO
+- [Gerenciador CPE] GET `/api/cpemanager/servico/{id_servico}/infodetail` — CPE - Detalhes — auth: basic — consulta
+- [Gerenciador CPE] POST `/api/cpemanager/servico/{id_servico}/sync/` — CPE - Sincronizar WAN — auth: basic — consulta
+- [Gerenciador CPE] POST `/api/cpemanager/servico/{id_servico}/wifi/import/` — CPE - Importar Wifi — auth: basic — consulta
+- [Gerenciador CPE] POST `/api/cpemanager/servico/{id_servico}/wifi/set/` — CPE - Definir Wifi — auth: basic — consulta
+- [Gerenciador CPE] POST `/api/cpemanager/servico/{id_servico}/pppoe/` — CPE - Configurar Wan — auth: basic — consulta
+- [Gerenciador CPE] POST `/api/cpemanager/servico/{id_servico}/command/ping/` — CPE - Ping — auth: basic — consulta
+- [Gerenciador CPE] POST `/api/cpemanager/servico/{id_servico}/command/speedtest/` — CPE - SpeedTest — auth: basic — consulta
+- [Gerenciador CPE] POST `/api/cpemanager/servico/{id_servico}/command/clear/` — CPE - Remover Dados do SGP — auth: basic — ESCRITA/PERIGO
+- [Gerenciador CPE] POST `/api/cpemanager/servico/{id_servico}/command/boot/` — CPE - Reboot — auth: basic — ESCRITA/PERIGO
+- [Gerenciador CPE] GET `/api/cpemanager/servico/{id_servico}/wifi/list/` — CPE - Wifi List — auth: basic — consulta
+- [Gerenciador CPE] POST `/api/cpemanager/servico/{id_servico}/wifi/update/` — CPE - Atualizar dados Wifi — auth: basic — ESCRITA/PERIGO
+- [Gerenciador CPE] POST `/api/cpemanager/servico/{id_servico}/update/field/?param=InternetGatewayDevice.LANDevice.1.WLANConfiguration.1.PreSharedKey.1.KeyPassphrase&value=123123456` — CPE - Atualizar Campo — auth: basic — ESCRITA/PERIGO

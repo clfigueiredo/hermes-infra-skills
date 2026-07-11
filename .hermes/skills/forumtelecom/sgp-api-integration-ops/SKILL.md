@@ -10,6 +10,9 @@ metadata:
     related_skills: [atendimento-isp-n1-n2, financeiro-ops, tr069-acs-ops, zabbix-ops]
     source_research:
       - https://github.com/ltitelecom/sgp-form-assinatura
+      - https://documenter.getpostman.com/view/6682240/2sB34hHg2V
+    mcp_server: mcp/sgp-api-mcp
+    html_reference: docs/sgp-api-capabilities.html
 ---
 # SGP Provedor — Integração API com Hermes
 
@@ -37,6 +40,31 @@ Não invente endpoint sensível se a documentação do ambiente não foi enviada
 5. **Não logar token**: logs devem registrar URL/endpoint/status/latência, nunca `token`, `Authorization` ou payload sensível completo.
 6. **Ambiente de teste primeiro**: validar em conta/cliente fake antes de apontar para produção.
 7. **Timeout e rate limit**: toda chamada precisa de timeout e tratamento de erro para não travar atendimento.
+
+## Documentação oficial analisada e artefatos gerados
+
+A documentação Postman enviada no curso foi analisada e mapeada em 237 endpoints:
+
+```text
+https://documenter.getpostman.com/view/6682240/2sB34hHg2V
+```
+
+Artefatos no repositório:
+
+- MCP server: `mcp/sgp-api-mcp`
+- Catálogo JSON: `mcp/sgp-api-mcp/sgp_api_catalog.json`
+- Análise Markdown: `mcp/sgp-api-mcp/SGP-API-ANALYSIS.md`
+- HTML objetivo: `docs/sgp-api-capabilities.html`
+
+Categorias mapeadas:
+
+```text
+Central Assinante, CRM, Estoque, FTTH, Gerenciador CPE,
+Ordem de Serviço, Pré-Cadastro, RADIUS, Remessa/Retorno,
+Suporte, Termo de Aceite, URA e Outros.
+```
+
+O MCP expõe tools read-only por padrão para catálogo, cliente, contratos, títulos, OS, FTTH, RADIUS, CPE e pré-cadastro. Operações perigosas/escrita ficam bloqueadas por `SGP_READ_ONLY=true`.
 
 ## Credenciais e variáveis de ambiente
 
