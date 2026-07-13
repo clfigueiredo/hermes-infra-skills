@@ -39,6 +39,7 @@ Backup versionado das skills de infraestrutura usadas pelo Hermes Agent.
   - Active Directory / Windows File Server
   - SGP Provedor / API ERP ISP
   - Dashboard NOC / diagnóstico por cliente PPPoE
+  - Beesweb / ERP ISP
 
 ## Restaurar em outro Hermes
 
